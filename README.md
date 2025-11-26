@@ -1,16 +1,16 @@
-# navi_app
+# 予約ナビ
 
-A new Flutter project.
+予約を忘れない、ナビも迷わない。あなたの予定をサポートするアプリです。
 
-## Getting Started
+## 主な機能
+- 📅 カレンダー連携で予定を自動取得
+- 🔔 予約時刻に合わせて通知
+- 🗺️ 通知からワンタップで Google Maps を起動
+- 🛡️ 予定情報は端末内のみ利用、外部送信なし
 
-This project is a starting point for a Flutter application.
+## 利用規約・プライバシーポリシー
+- [利用規約](https://dansyakuimo1988-spec.github.io/navi_app/terms.html)  
+- [プライバシーポリシー](https://dansyakuimo1988-spec.github.io/navi_app/privacy.html)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 公開予定
+Google Play / App Store にて公開予定
