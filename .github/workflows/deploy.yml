@@ -1,0 +1,41 @@
+`yaml
+name: Build and Deploy Flutter Web
+
+on:
+  push:
+    branches:
+      - main   # mainにpushしたら動く
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'  # まさひこが使っとるバージョンに合わせる
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build web
+        run: flutter build web
+
+      - name: Copy build to docs
+        run: |
+          rm -rf docs
+          mkdir docs
+          cp -r build/web/* docs/
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs
+          git commit -m "Auto-build and deploy to docs"
+          git push
+`
