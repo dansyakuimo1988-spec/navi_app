@@ -1,4 +1,3 @@
-yaml
 name: Build and Deploy Flutter Web
 
 on:
@@ -38,4 +37,3 @@ jobs:
           git add docs
           git commit -m "Auto-build and deploy to docs"
           git push
-`
