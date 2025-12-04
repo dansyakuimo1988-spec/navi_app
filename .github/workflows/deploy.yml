@@ -15,13 +15,13 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.38.3'  # 最新に合わせる
+          flutter-version: '3.38.3'  # 最新版に合わせる
 
       - name: Install dependencies
         run: flutter pub get
 
       - name: Build web
-        run: flutter build web
+        run: flutter build web --base-href /navi_app/   # ← ここが重要！
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -35,7 +35,7 @@ jobs:
       pages: write
       id-token: write
     environment:
-      name: github-pages   # ← これが必須！
+      name: github-pages   # ← 必須
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
