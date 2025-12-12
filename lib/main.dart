@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'reservation.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'calendar_service.dart';  // ← カレンダー取得処理を別ファイル化
 
 void main() {
   runApp(const MyApp());
@@ -23,30 +24,49 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-  // ダミーの予約データ（1件のみ）
-  Reservation get reservation => Reservation(
-    title: '歯医者の予約',
-    place: '長岡市中央クリニック',
-    startTime: DateTime(2025, 11, 20, 14, 0),
-    duration: const Duration(minutes: 30),
-    memo: '診察券を忘れない',
-  );
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final CalendarService _calendarService = CalendarService();
+  List<Reservation> _reservations = [];
+  bool _loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadReservations();
+  }
+
+  Future<void> _loadReservations() async {
+    final data = await _calendarService.fetchReservations();
+    setState(() {
+      _reservations = data;
+      _loading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('今日の予約')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ReservationCard(reservation: reservation),
-      ),
+      body: _loading
+          ? const Center(child: CircularProgressIndicator())
+          : _reservations.isEmpty
+              ? const Center(child: Text('予定はありません'))
+              : ListView.builder(
+                  itemCount: _reservations.length,
+                  itemBuilder: (context, index) {
+                    return ReservationCard(reservation: _reservations[index]);
+                  },
+                ),
     );
   }
 }
-
 // 予約を見やすく表示するカードUI
 class ReservationCard extends StatelessWidget {
   final Reservation reservation;
