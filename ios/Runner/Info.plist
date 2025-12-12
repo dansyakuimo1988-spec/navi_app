@@ -45,5 +45,8 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>予定を取得するためにカレンダーへのアクセスが必要です</string>
+
 </dict>
 </plist>
