@@ -28,7 +28,7 @@ jobs:
       - name: Build iOS
         run: flutter build ios --release
 
-      - name: Upload artifacts
+      - name: Upload iOS build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: ios-build
