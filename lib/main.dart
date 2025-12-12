@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'reservation.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'calendar_service.dart';  // ← カレンダー取得処理を別ファイル化
 
 void main() {
   runApp(const MyApp());
